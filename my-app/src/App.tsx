@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <p>CODEIRO CHALLENGE</p>
+    <div >
+      <p>COGNIZANT CHALLENGE</p>
     </div>
   );
 }
