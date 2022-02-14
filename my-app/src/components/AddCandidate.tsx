@@ -30,8 +30,14 @@ export const AddCandidate: React.FC<Props> = ({
       note: data.note,
       status: "First Interview",
     };
-    setCandidates([...candidates, candiadateData]);
-    reset();
+
+    const sameName = candidates.filter((el) => el.fullName === data.fullName);
+    if (sameName.length > 0) {
+      console.log("CANDIDATES CANT HAVE THE SAME NAME");
+    } else {
+      setCandidates([...candidates, candiadateData]);
+      reset();
+    }
   });
 
   const handleCloseForm = () => {

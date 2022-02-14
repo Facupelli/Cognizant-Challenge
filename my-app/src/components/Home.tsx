@@ -76,26 +76,82 @@ export const Home: React.FC = () => {
         <Column>
           <ColumnTitle>First Interview</ColumnTitle>
           {candidates.length > 0 &&
-            candidates.map((el, i) => (
-              <CandidateComponent
-                key={i}
-                candidate={el}
-                candidates={candidates}
-                setCandidates={setCandidates}
-              />
-            ))}
+            candidates.map((el, i) => {
+              if (el.status === "First Interview") {
+                return (
+                  <CandidateComponent
+                    key={i}
+                    candidate={el}
+                    candidates={candidates}
+                    setCandidates={setCandidates}
+                  />
+                );
+              }
+            })}
         </Column>
         <Column>
           <ColumnTitle>Tecnical Interview</ColumnTitle>
+          {candidates.length > 0 &&
+            candidates.map((el, i) => {
+              if (el.status === "Tecnical Interview") {
+                return (
+                  <CandidateComponent
+                    key={i}
+                    candidate={el}
+                    candidates={candidates}
+                    setCandidates={setCandidates}
+                  />
+                );
+              }
+            })}
         </Column>
         <Column>
           <ColumnTitle>Offer</ColumnTitle>
+          {candidates.length > 0 &&
+            candidates.map((el, i) => {
+              if (el.status === "Offer") {
+                return (
+                  <CandidateComponent
+                    key={i}
+                    candidate={el}
+                    candidates={candidates}
+                    setCandidates={setCandidates}
+                  />
+                );
+              }
+            })}
         </Column>
         <Column>
           <ColumnTitle>Assignment</ColumnTitle>
+          {candidates.length > 0 &&
+            candidates.map((el, i) => {
+              if (el.status === "Assignment") {
+                return (
+                  <CandidateComponent
+                    key={i}
+                    candidate={el}
+                    candidates={candidates}
+                    setCandidates={setCandidates}
+                  />
+                );
+              }
+            })}
         </Column>
         <Column>
           <ColumnTitle>Rejection</ColumnTitle>
+          {candidates.length > 0 &&
+            candidates.map((el, i) => {
+              if (el.status === "Rejection") {
+                return (
+                  <CandidateComponent
+                    key={i}
+                    candidate={el}
+                    candidates={candidates}
+                    setCandidates={setCandidates}
+                  />
+                );
+              }
+            })}
         </Column>
         <BottomColumn>
           <Button onClick={hanldeAddCandidate}>Add Candidate</Button>

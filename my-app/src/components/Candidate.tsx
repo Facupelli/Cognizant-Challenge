@@ -47,50 +47,75 @@ export const CandidateComponent: React.FC<Props> = ({
   candidates,
   setCandidates,
 }) => {
+    
   const add = () => {
     if (candidate.status !== "Rejection") {
-      const newCandidates = candidates.map((el) => {
-        if (el.fullName === candidate.fullName) {
-          if (el.status === "First Interview") {
-            return { ...el, status: "Tecnical Interview" };
-          }
-          if (el.status === "Tecnical Interview") {
-            return { ...el, status: "Offer" };
-          }
-          if (el.status === "Offer") {
-            return { ...el, status: "Assignment" };
-          }
-          if (el.status === "Assignment") {
-            return { ...el, status: "Rejection" };
-          }
-          return el;
-        }
-      });
-      console.log(newCandidates);
+      const candidateToUpdate = candidates.findIndex(
+        (el) => el.fullName === candidate.fullName
+      );
+
+      const newCandidates = [...candidates];
+
+      if (newCandidates[candidateToUpdate].status === "First Interview") {
+        newCandidates[candidateToUpdate] = {
+          ...newCandidates[candidateToUpdate],
+          status: "Tecnical Interview",
+        };
+      } else if (
+        newCandidates[candidateToUpdate].status === "Tecnical Interview"
+      ) {
+        newCandidates[candidateToUpdate] = {
+          ...newCandidates[candidateToUpdate],
+          status: "Offer",
+        };
+      } else if (newCandidates[candidateToUpdate].status === "Offer") {
+        newCandidates[candidateToUpdate] = {
+          ...newCandidates[candidateToUpdate],
+          status: "Assignment",
+        };
+      } else if (newCandidates[candidateToUpdate].status === "Assignment") {
+        newCandidates[candidateToUpdate] = {
+          ...newCandidates[candidateToUpdate],
+          status: "Rejection",
+        };
+      }
+
       setCandidates(newCandidates);
     }
   };
 
   const substract = () => {
     if (candidate.status !== "First Interview") {
-      const newCandidates = candidates.map((el) => {
-        if (el.fullName === candidate.fullName) {
-          if (el.status === "Rejection") {
-            return { ...el, status: "Assignment" };
-          }
-          if (el.status === "Assignment") {
-            return { ...el, status: "Offer" };
-          }
-          if (el.status === "Offer") {
-            return { ...el, status: "Tecnical Interview" };
-          }
-          if (el.status === "Tecnical Interview") {
-            return { ...el, status: "First Interview" };
-          }
-          return el;
-        }
-      });
-      console.log(newCandidates);
+      const candidateToUpdate = candidates.findIndex(
+        (el) => el.fullName === candidate.fullName
+      );
+
+      const newCandidates = [...candidates];
+
+      if (newCandidates[candidateToUpdate].status === "Rejection") {
+        newCandidates[candidateToUpdate] = {
+          ...newCandidates[candidateToUpdate],
+          status: "Assignment",
+        };
+      } else if (
+        newCandidates[candidateToUpdate].status === "Assignment"
+      ) {
+        newCandidates[candidateToUpdate] = {
+          ...newCandidates[candidateToUpdate],
+          status: "Offer",
+        };
+      } else if (newCandidates[candidateToUpdate].status === "Offer") {
+        newCandidates[candidateToUpdate] = {
+          ...newCandidates[candidateToUpdate],
+          status: "Tecnical Interview",
+        };
+      } else if (newCandidates[candidateToUpdate].status === "Tecnical Interview") {
+        newCandidates[candidateToUpdate] = {
+          ...newCandidates[candidateToUpdate],
+          status: "First Interview",
+        };
+      }
+
       setCandidates(newCandidates);
     }
   };
