@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { AddCandidate } from "./AddCandidate";
+import { CandidateComponent } from "./Candidate";
 
 const Board = styled.div`
   // background: red;
@@ -47,53 +48,66 @@ type State = string[];
 
 export type CandidateState = Candidate[];
 
-
-type Candidate = {
+export type Candidate = {
   fullName: string;
   note: string;
-}
+  status: string;
+};
 
 export const Home: React.FC = () => {
-  const [showForm, setShowForm] = useState<Boolean>(false)
+  const [showForm, setShowForm] = useState<Boolean>(false);
 
-  const [candidates, setCandidates] = useState<CandidateState>([])
-  console.log('candidate', candidates)
+  const [candidates, setCandidates] = useState<CandidateState>([]);
+  console.log("candidates", candidates);
 
-  const [firstInterview, setFirstInterview] = useState<State>([])
-  const [tecnicalInterview, setTecnicalInterview] = useState<State>([])
-  const [offer, setOffer] = useState<State>([])
-  const [assignment, setAssignment] = useState<State>([])
-  const [rejection, setRejection] = useState<State>([])
-
+  const [firstInterview, setFirstInterview] = useState<State>([]);
+  const [tecnicalInterview, setTecnicalInterview] = useState<State>([]);
+  const [offer, setOffer] = useState<State>([]);
+  const [assignment, setAssignment] = useState<State>([]);
+  const [rejection, setRejection] = useState<State>([]);
 
   const hanldeAddCandidate = () => {
-    setShowForm(true)
-  }
-
+    setShowForm(true);
+  };
 
   return (
     <>
-    <Board>
-      <Column>
-        <ColumnTitle>First Interview</ColumnTitle>
-      </Column>
-      <Column>
-        <ColumnTitle>Tecnical Interview</ColumnTitle>
-      </Column>
-      <Column>
-        <ColumnTitle>Offer</ColumnTitle>
-      </Column>
-      <Column>
-        <ColumnTitle>Assignment</ColumnTitle>
-      </Column>
-      <Column>
-        <ColumnTitle>Rejection</ColumnTitle>
-      </Column>
-      <BottomColumn>
-        <Button onClick={hanldeAddCandidate}>Add Candidate</Button>
-      </BottomColumn>
-    </Board>
-    {showForm && <AddCandidate setShowForm={setShowForm} setCandidates={setCandidates} candidates={candidates}/>}
+      <Board>
+        <Column>
+          <ColumnTitle>First Interview</ColumnTitle>
+          {candidates.length > 0 &&
+            candidates.map((el, i) => (
+              <CandidateComponent
+                key={i}
+                candidate={el}
+                candidates={candidates}
+                setCandidates={setCandidates}
+              />
+            ))}
+        </Column>
+        <Column>
+          <ColumnTitle>Tecnical Interview</ColumnTitle>
+        </Column>
+        <Column>
+          <ColumnTitle>Offer</ColumnTitle>
+        </Column>
+        <Column>
+          <ColumnTitle>Assignment</ColumnTitle>
+        </Column>
+        <Column>
+          <ColumnTitle>Rejection</ColumnTitle>
+        </Column>
+        <BottomColumn>
+          <Button onClick={hanldeAddCandidate}>Add Candidate</Button>
+        </BottomColumn>
+      </Board>
+      {showForm && (
+        <AddCandidate
+          setShowForm={setShowForm}
+          setCandidates={setCandidates}
+          candidates={candidates}
+        />
+      )}
     </>
   );
 };

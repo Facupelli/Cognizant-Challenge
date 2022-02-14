@@ -22,12 +22,17 @@ export const AddCandidate: React.FC<Props> = ({
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<FormData>();
   const onSubmit = handleSubmit((data) => {
-      setCandidates([...candidates, data])
-      reset()
-    });
+    const candiadateData = {
+      fullName: data.fullName,
+      note: data.note,
+      status: "First Interview",
+    };
+    setCandidates([...candidates, candiadateData]);
+    reset();
+  });
 
   const handleCloseForm = () => {
     setShowForm(false);
