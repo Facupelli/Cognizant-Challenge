@@ -3,7 +3,7 @@ import { CandidateState } from "./Home";
 
 type Props = {
   candidates: CandidateState;
-  deleteCandidate: String;
+  deleteCandidate: number;
   setShowModal: React.Dispatch<React.SetStateAction<any>>;
   setCandidates: React.Dispatch<React.SetStateAction<any>>;
 };
@@ -20,7 +20,7 @@ export const Modal: React.FC<Props> = ({
 
   const handleYes = () => {
     const candidatesUpdated = candidates.filter(
-      (el) => el.fullName !== deleteCandidate
+      (el) => el.id !== deleteCandidate
     );
 
     setCandidates(candidatesUpdated)

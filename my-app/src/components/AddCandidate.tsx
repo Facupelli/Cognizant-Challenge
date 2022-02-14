@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { CandidateState } from "./Home";
+import { Candidate, CandidateState } from "./Home";
 
 type FormData = {
   fullName: string;
@@ -11,12 +11,20 @@ type Props = {
   setShowForm: React.Dispatch<React.SetStateAction<any>>;
   setCandidates: React.Dispatch<React.SetStateAction<any>>;
   candidates: CandidateState;
+  editCandidate: Candidate;
+  setEditCandidate: React.Dispatch<React.SetStateAction<any>>;
+  id: number;
+  setId: React.Dispatch<React.SetStateAction<any>>;
 };
 
 export const AddCandidate: React.FC<Props> = ({
   setShowForm,
   setCandidates,
   candidates,
+  editCandidate,
+  setEditCandidate,
+  id,
+  setId,
 }) => {
   const {
     register,
@@ -24,33 +32,93 @@ export const AddCandidate: React.FC<Props> = ({
     formState: { errors },
     reset,
   } = useForm<FormData>();
-  const onSubmit = handleSubmit((data) => {
-    const candiadateData = {
-      fullName: data.fullName,
-      note: data.note,
-      status: "First Interview",
-    };
 
-    const sameName = candidates.filter((el) => el.fullName === data.fullName);
-    if (sameName.length > 0) {
-      console.log("CANDIDATES CANT HAVE THE SAME NAME");
+  const onSubmit = handleSubmit((data) => {
+    // EDIT CANDIDATE
+    if (editCandidate.fullName.length > 0) {
+      const candidateToUpdate = candidates.findIndex(
+        (el) => el.id === editCandidate.id
+      );
+
+      const newCandidates = [...candidates];
+
+      console.log("esto", newCandidates[candidateToUpdate]);
+
+      newCandidates[candidateToUpdate].fullName = data.fullName;
+      newCandidates[candidateToUpdate].note = data.note;
+
+      setCandidates(newCandidates);
+      setEditCandidate({
+        fullName: "",
+        note: "",
+        status: "",
+        id: 0,
+      });
     } else {
-      setCandidates([...candidates, candiadateData]);
-      reset();
+      // ADD CANDIDATE
+      const candiadateData = {
+        fullName: data.fullName,
+        note: data.note,
+        status: "First Interview",
+        id,
+      };
+
+      setId(id + 1);
+
+      const sameName = candidates.filter((el) => el.fullName === data.fullName);
+      if (sameName.length > 0) {
+        console.log("CANDIDATES CANT HAVE THE SAME NAME");
+        // ADD CANDIDATE
+      } else {
+        setCandidates([...candidates, candiadateData]);
+        reset();
+        setEditCandidate({
+          fullName: "",
+          note: "",
+          status: "",
+          id: 0,
+        });
+      }
     }
+    setShowForm(false);
   });
 
   const handleCloseForm = () => {
     setShowForm(false);
+    setEditCandidate({
+      fullName: "",
+      note: "",
+      status: "",
+      id: 0,
+    });
   };
+
+  const handleEdit = () => {};
 
   return (
     <form onSubmit={onSubmit}>
       <label>Full Name</label>
-      <input {...register("fullName")} />
+      {editCandidate.fullName.length > 0 ? (
+        <input
+          {...register("fullName")}
+          defaultValue={editCandidate.fullName}
+        />
+      ) : (
+        <input {...register("fullName")} />
+      )}
+
       <label>Note</label>
-      <input {...register("note")} />
-      <button type="submit">ADD</button>
+      {editCandidate.fullName.length > 0 ? (
+        <input {...register("note")} defaultValue={editCandidate.note} />
+      ) : (
+        <input {...register("note")} />
+      )}
+
+      {editCandidate.fullName.length > 0 ? (
+        <button type="submit">EDIT</button>
+      ) : (
+        <button type="submit">ADD</button>
+      )}
       <p onClick={handleCloseForm}>X</p>
     </form>
   );

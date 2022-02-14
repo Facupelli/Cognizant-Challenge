@@ -52,6 +52,8 @@ type Props = {
   setCandidates: React.Dispatch<React.SetStateAction<any>>;
   setShowModal: React.Dispatch<React.SetStateAction<any>>;
   setDeleteCandidate: React.Dispatch<React.SetStateAction<any>>;
+  setShowForm: React.Dispatch<React.SetStateAction<any>>;
+  setEditCandidate: React.Dispatch<React.SetStateAction<any>>;
 };
 
 export const CandidateComponent: React.FC<Props> = ({
@@ -60,11 +62,13 @@ export const CandidateComponent: React.FC<Props> = ({
   setCandidates,
   setShowModal,
   setDeleteCandidate,
+  setShowForm,
+  setEditCandidate,
 }) => {
   const add = () => {
     if (candidate.status !== "Rejection") {
       const candidateToUpdate = candidates.findIndex(
-        (el) => el.fullName === candidate.fullName
+        (el) => el.id === candidate.id
       );
 
       const newCandidates = [...candidates];
@@ -100,7 +104,7 @@ export const CandidateComponent: React.FC<Props> = ({
   const substract = () => {
     if (candidate.status !== "First Interview") {
       const candidateToUpdate = candidates.findIndex(
-        (el) => el.fullName === candidate.fullName
+        (el) => el.id === candidate.id
       );
 
       const newCandidates = [...candidates];
@@ -133,9 +137,14 @@ export const CandidateComponent: React.FC<Props> = ({
     }
   };
 
-  const handleDelete = (candidateName: String) => {
+  const handleEdit = () => {
+    setEditCandidate(candidate)
+    setShowForm(true);
+  };
+
+  const handleDelete = (candidateId: number) => {
     setShowModal(true);
-    setDeleteCandidate(candidateName);
+    setDeleteCandidate(candidateId);
   };
 
   return (
@@ -145,9 +154,10 @@ export const CandidateComponent: React.FC<Props> = ({
           <div>
             <FlexDiv>
               <Name>{candidate.fullName}</Name>
-              <Cross onClick={() => handleDelete(candidate.fullName)}>X</Cross>
+              <Cross onClick={() => handleDelete(candidate.id)}>X</Cross>
             </FlexDiv>
             <Note>{candidate.note}</Note>
+            <Note onClick={handleEdit}>Edit</Note>
           </div>
           <ButtonsWrap>
             <Button onClick={substract}>-</Button>

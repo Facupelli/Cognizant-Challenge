@@ -45,26 +45,30 @@ const BottomColumn = styled.div`
   padding: 10px;
 `;
 
-type State = string[];
-
 export type CandidateState = Candidate[];
 
 export type Candidate = {
   fullName: string;
   note: string;
   status: string;
+  id: number;
 };
 
 export const Home: React.FC = () => {
   const [showForm, setShowForm] = useState<Boolean>(false);
   const [showModal, setShowModal] = useState<Boolean>(false);
-  const [deleteCandidate, setDeleteCandidate] = useState<String>('')
+  const [deleteCandidate, setDeleteCandidate] = useState<number>(0);
+  const [editCandidate, setEditCandidate] = useState<Candidate>({
+    fullName: "",
+    note: "",
+    status: "",
+    id: 0,
+  });
 
+  const [id, setId] = useState<number>(1)
 
   const [candidates, setCandidates] = useState<CandidateState>([]);
   console.log("candidates", candidates);
-
-  
 
   const hanldeAddCandidate = () => {
     setShowForm(true);
@@ -86,6 +90,8 @@ export const Home: React.FC = () => {
                     setCandidates={setCandidates}
                     setShowModal={setShowModal}
                     setDeleteCandidate={setDeleteCandidate}
+                    setShowForm={setShowForm}
+                    setEditCandidate={setEditCandidate}
                   />
                 );
               }
@@ -104,6 +110,8 @@ export const Home: React.FC = () => {
                     setCandidates={setCandidates}
                     setShowModal={setShowModal}
                     setDeleteCandidate={setDeleteCandidate}
+                    setShowForm={setShowForm}
+                    setEditCandidate={setEditCandidate}
                   />
                 );
               }
@@ -122,6 +130,8 @@ export const Home: React.FC = () => {
                     setCandidates={setCandidates}
                     setShowModal={setShowModal}
                     setDeleteCandidate={setDeleteCandidate}
+                    setShowForm={setShowForm}
+                    setEditCandidate={setEditCandidate}
                   />
                 );
               }
@@ -140,6 +150,8 @@ export const Home: React.FC = () => {
                     setCandidates={setCandidates}
                     setShowModal={setShowModal}
                     setDeleteCandidate={setDeleteCandidate}
+                    setShowForm={setShowForm}
+                    setEditCandidate={setEditCandidate}
                   />
                 );
               }
@@ -158,6 +170,8 @@ export const Home: React.FC = () => {
                     setCandidates={setCandidates}
                     setShowModal={setShowModal}
                     setDeleteCandidate={setDeleteCandidate}
+                    setShowForm={setShowForm}
+                    setEditCandidate={setEditCandidate}
                   />
                 );
               }
@@ -172,10 +186,19 @@ export const Home: React.FC = () => {
           setShowForm={setShowForm}
           setCandidates={setCandidates}
           candidates={candidates}
+          editCandidate={editCandidate}
+          setEditCandidate={setEditCandidate}
+          id={id}
+          setId={setId}
         />
       )}
       {showModal && (
-        <Modal setShowModal={setShowModal} candidates={candidates} setCandidates={setCandidates}  deleteCandidate={deleteCandidate} />
+        <Modal
+          setShowModal={setShowModal}
+          candidates={candidates}
+          setCandidates={setCandidates}
+          deleteCandidate={deleteCandidate}
+        />
       )}
     </>
   );
