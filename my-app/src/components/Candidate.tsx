@@ -9,10 +9,20 @@ const Card = styled.div`
   padding: 0.5rem;
 `;
 
+const FlexDiv = styled.div`
+  display: flex;
+`;
+
 const Name = styled.p`
   margin: 0;
   padding: 0;
   font-weight: bold;
+`;
+
+const Cross = styled.p`
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
 `;
 
 const Note = styled.p`
@@ -40,14 +50,17 @@ type Props = {
   candidate: Candidate;
   candidates: CandidateState;
   setCandidates: React.Dispatch<React.SetStateAction<any>>;
+  setShowModal: React.Dispatch<React.SetStateAction<any>>;
+  setDeleteCandidate: React.Dispatch<React.SetStateAction<any>>;
 };
 
 export const CandidateComponent: React.FC<Props> = ({
   candidate,
   candidates,
   setCandidates,
+  setShowModal,
+  setDeleteCandidate,
 }) => {
-    
   const add = () => {
     if (candidate.status !== "Rejection") {
       const candidateToUpdate = candidates.findIndex(
@@ -97,9 +110,7 @@ export const CandidateComponent: React.FC<Props> = ({
           ...newCandidates[candidateToUpdate],
           status: "Assignment",
         };
-      } else if (
-        newCandidates[candidateToUpdate].status === "Assignment"
-      ) {
+      } else if (newCandidates[candidateToUpdate].status === "Assignment") {
         newCandidates[candidateToUpdate] = {
           ...newCandidates[candidateToUpdate],
           status: "Offer",
@@ -109,7 +120,9 @@ export const CandidateComponent: React.FC<Props> = ({
           ...newCandidates[candidateToUpdate],
           status: "Tecnical Interview",
         };
-      } else if (newCandidates[candidateToUpdate].status === "Tecnical Interview") {
+      } else if (
+        newCandidates[candidateToUpdate].status === "Tecnical Interview"
+      ) {
         newCandidates[candidateToUpdate] = {
           ...newCandidates[candidateToUpdate],
           status: "First Interview",
@@ -120,12 +133,20 @@ export const CandidateComponent: React.FC<Props> = ({
     }
   };
 
+  const handleDelete = (candidateName: String) => {
+    setShowModal(true);
+    setDeleteCandidate(candidateName);
+  };
+
   return (
     <>
       {candidate && (
         <Card>
           <div>
-            <Name>{candidate.fullName}</Name>
+            <FlexDiv>
+              <Name>{candidate.fullName}</Name>
+              <Cross onClick={() => handleDelete(candidate.fullName)}>X</Cross>
+            </FlexDiv>
             <Note>{candidate.note}</Note>
           </div>
           <ButtonsWrap>
