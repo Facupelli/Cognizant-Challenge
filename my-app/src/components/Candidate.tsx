@@ -1,9 +1,15 @@
 import React from "react";
 import { Candidate, CandidateState } from "./Home";
 import styled from "styled-components";
+import {
+  PencilIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  TrashIcon,
+} from "@heroicons/react/solid";
 
 const Card = styled.div`
-  background: #b8ac58;
+  background: #f0d8d8;
   border-radius: 0.2rem;
   margin-top: 0.8rem;
   padding: 0.5rem;
@@ -19,10 +25,16 @@ const Name = styled.p`
   font-weight: bold;
 `;
 
-const Cross = styled.p`
-  margin: 0;
+const Cross = styled.div`
+  margin: 0 0 0 auto;
   padding: 0;
-  margin-left: auto;
+  height: 1.3rem;
+  width: 1.3rem;
+  cursor: pointer;
+  color: #b36b6b;
+  &:hover {
+    color: #f09090;
+  }
 `;
 
 const Note = styled.p`
@@ -30,20 +42,33 @@ const Note = styled.p`
   padding: 0;
 `;
 
-const Button = styled.button`
-  background: #9c6754;
-  color: white;
-  padding: 0.5rem;
+const Edit = styled.div`
+  margin: 0 auto 0 0;
+  padding: 0;
+  height: 1.3rem;
+  width: 1.3rem;
   cursor: pointer;
-  border-radius: 8px;
-  border-style: none;
-  text-align: center;
+  color: #b36b6b;
+  &:hover {
+    color: #f09090;
+  }
+`;
+
+const Move = styled.div`
+  height: 1.8rem;
+  width: 1.8rem;
+  cursor: pointer;
+  color: #b36b6b;
+  &:hover {
+    color: #f09090;
+  }
 `;
 
 const ButtonsWrap = styled.div`
   display: flex;
-  justify-content: end;
   gap: 0.5rem;
+  align-items: center;
+  padding-top: 0.5rem;
 `;
 
 type Props = {
@@ -138,7 +163,7 @@ export const CandidateComponent: React.FC<Props> = ({
   };
 
   const handleEdit = () => {
-    setEditCandidate(candidate)
+    setEditCandidate(candidate);
     setShowForm(true);
   };
 
@@ -154,14 +179,22 @@ export const CandidateComponent: React.FC<Props> = ({
           <div>
             <FlexDiv>
               <Name>{candidate.fullName}</Name>
-              <Cross onClick={() => handleDelete(candidate.id)}>X</Cross>
+              <Cross onClick={() => handleDelete(candidate.id)}>
+                <TrashIcon />
+              </Cross>
             </FlexDiv>
             <Note>{candidate.note}</Note>
-            <Note onClick={handleEdit}>Edit</Note>
           </div>
           <ButtonsWrap>
-            <Button onClick={substract}>-</Button>
-            <Button onClick={add}>+</Button>
+            <Edit onClick={handleEdit}>
+              <PencilIcon />
+            </Edit>
+            <Move onClick={substract}>
+              <ChevronLeftIcon />
+            </Move>
+            <Move onClick={add}>
+              <ChevronRightIcon />
+            </Move>
           </ButtonsWrap>
         </Card>
       )}

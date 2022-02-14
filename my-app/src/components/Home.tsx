@@ -15,34 +15,35 @@ const Board = styled.div`
 `;
 
 const Column = styled.div`
-  background: #e9ab95;
+  background: #A49393;
   padding: 10px;
   min-height: 70vh;
+  border-radius: 0.5rem;
 `;
 
 const ColumnTitle = styled.p`
   font-weight: bold;
   font-size: 1.3rem;
-  background: red;
   margin: 0px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #706565;
+`;
+
+const BottomColumn = styled.div`
+  // background: #ffcebd;
+  grid-column-start: 1;
+  grid-column-end: 2;
 `;
 
 const Button = styled.button`
   background: #9c6754;
   color: white;
-  padding: 10px;
   cursor: pointer;
+  padding: 0.8rem;
   border-radius: 8px;
   border-style: none;
   text-align: center;
-  margin-left: auto;
-`;
-
-const BottomColumn = styled.div`
-  background: #ffcebd;
-  grid-column-start: 1;
-  grid-column-end: 2;
-  padding: 10px;
 `;
 
 export type CandidateState = Candidate[];

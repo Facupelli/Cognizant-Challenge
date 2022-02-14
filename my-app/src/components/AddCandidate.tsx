@@ -1,6 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Candidate, CandidateState } from "./Home";
+import { ModalStyled } from "./Modal";
+import styled from "styled-components";
+
+const Container = styled.div`
+  margin: 15% auto;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  border: 2px solid #b36b6b;
+  width: 30%;
+  background: white;
+  font-size: 1.2rem;
+`;
 
 type FormData = {
   fullName: string;
@@ -41,8 +53,6 @@ export const AddCandidate: React.FC<Props> = ({
       );
 
       const newCandidates = [...candidates];
-
-      console.log("esto", newCandidates[candidateToUpdate]);
 
       newCandidates[candidateToUpdate].fullName = data.fullName;
       newCandidates[candidateToUpdate].note = data.note;
@@ -96,30 +106,34 @@ export const AddCandidate: React.FC<Props> = ({
   const handleEdit = () => {};
 
   return (
-    <form onSubmit={onSubmit}>
-      <label>Full Name</label>
-      {editCandidate.fullName.length > 0 ? (
-        <input
-          {...register("fullName")}
-          defaultValue={editCandidate.fullName}
-        />
-      ) : (
-        <input {...register("fullName")} />
-      )}
+    <ModalStyled>
+      <Container>
+        <form onSubmit={onSubmit}>
+          <label>Full Name</label>
+          {editCandidate.fullName.length > 0 ? (
+            <input
+              {...register("fullName")}
+              defaultValue={editCandidate.fullName}
+            />
+          ) : (
+            <input {...register("fullName")} />
+          )}
 
-      <label>Note</label>
-      {editCandidate.fullName.length > 0 ? (
-        <input {...register("note")} defaultValue={editCandidate.note} />
-      ) : (
-        <input {...register("note")} />
-      )}
+          <label>Note</label>
+          {editCandidate.fullName.length > 0 ? (
+            <input {...register("note")} defaultValue={editCandidate.note} />
+          ) : (
+            <input {...register("note")} />
+          )}
 
-      {editCandidate.fullName.length > 0 ? (
-        <button type="submit">EDIT</button>
-      ) : (
-        <button type="submit">ADD</button>
-      )}
-      <p onClick={handleCloseForm}>X</p>
-    </form>
+          {editCandidate.fullName.length > 0 ? (
+            <button type="submit">EDIT</button>
+          ) : (
+            <button type="submit">ADD</button>
+          )}
+          <p onClick={handleCloseForm}>X</p>
+        </form>
+      </Container>
+    </ModalStyled>
   );
 };
