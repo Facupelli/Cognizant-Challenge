@@ -1,8 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Candidate, CandidateState } from "./Home";
-import { ModalStyled } from "./Modal";
+import { Button, ModalStyled } from "./Modal";
 import styled from "styled-components";
+import { XIcon } from "@heroicons/react/solid";
+import { Cross } from "./Candidate";
 
 const Container = styled.div`
   margin: 15% auto;
@@ -12,6 +14,29 @@ const Container = styled.div`
   width: 30%;
   background: white;
   font-size: 1.2rem;
+`;
+
+const Form = styled.div`
+  display: grid;
+  grid-template-columns: 30% 60%;
+  align-items: baseline;
+  row-gap: 1rem;
+`;
+
+const Label = styled.label`
+  margin-right: 1rem;
+`;
+
+const Input = styled.input`
+  padding: 0.6rem;
+  border-radius: 0.2rem;
+  border: 1px solid #f09090;
+`;
+
+const MarginLeft = styled.div`
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: end;
 `;
 
 type FormData = {
@@ -109,29 +134,37 @@ export const AddCandidate: React.FC<Props> = ({
     <ModalStyled>
       <Container>
         <form onSubmit={onSubmit}>
-          <label>Full Name</label>
-          {editCandidate.fullName.length > 0 ? (
-            <input
-              {...register("fullName")}
-              defaultValue={editCandidate.fullName}
-            />
-          ) : (
-            <input {...register("fullName")} />
-          )}
+          <Cross onClick={handleCloseForm}>
+            <XIcon />
+          </Cross>
 
-          <label>Note</label>
-          {editCandidate.fullName.length > 0 ? (
-            <input {...register("note")} defaultValue={editCandidate.note} />
-          ) : (
-            <input {...register("note")} />
-          )}
+          <Form>
+            <Label>Full Name:</Label>
+            {editCandidate.fullName.length > 0 ? (
+              <Input
+                {...register("fullName")}
+                defaultValue={editCandidate.fullName}
+              />
+            ) : (
+              <Input {...register("fullName")} />
+            )}
+            <Label>Note:</Label>
+            {editCandidate.fullName.length > 0 ? (
+              <Input {...register("note")} defaultValue={editCandidate.note} />
+            ) : (
+              <Input {...register("note")} />
+            )}
+          </Form>
 
           {editCandidate.fullName.length > 0 ? (
-            <button type="submit">EDIT</button>
+            <MarginLeft>
+              <Button type="submit">EDIT</Button>
+            </MarginLeft>
           ) : (
-            <button type="submit">ADD</button>
+            <MarginLeft>
+              <Button type="submit">ADD</Button>
+            </MarginLeft>
           )}
-          <p onClick={handleCloseForm}>X</p>
         </form>
       </Container>
     </ModalStyled>

@@ -17,7 +17,7 @@ const Container = styled.div`
   border-radius: 0.3rem;
   border: 2px solid #b36b6b;
   width: 30%;
-  background: #f09090;
+  background: white;
   font-size: 1.2rem;
 `;
 
@@ -31,7 +31,7 @@ const FlexDiv = styled.div`
   gap: 2rem;
 `
 
-const Button = styled.button`
+export const Button = styled.button`
   background: #f0d8d8;
   color: #706565;
   cursor: pointer;
@@ -40,6 +40,10 @@ const Button = styled.button`
   border-radius: 8px;
   border-style: none;
   text-align: center;
+  &:hover {
+    background: #706565;
+    color: #f0d8d8;
+  }
 `;
 
 type Props = {

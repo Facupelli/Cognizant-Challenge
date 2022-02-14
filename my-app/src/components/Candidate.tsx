@@ -25,7 +25,7 @@ const Name = styled.p`
   font-weight: bold;
 `;
 
-const Cross = styled.div`
+export const Cross = styled.div`
   margin: 0 0 0 auto;
   padding: 0;
   height: 1.3rem;
