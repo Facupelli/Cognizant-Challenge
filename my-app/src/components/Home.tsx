@@ -11,14 +11,19 @@ const Board = styled.div`
   column-gap: 10px;
   row-gap: 10px;
   justify-content: center;
-  min-height: 90vh;
+  height: 80vh;
+  padding-top: 2rem;
 `;
 
 const Column = styled.div`
-  background: #A49393;
-  padding: 10px;
-  min-height: 70vh;
+  box-sizing: border-box;
+  background: #ededed;
+  padding: 0.6rem;
+  height: 100%;
   border-radius: 0.5rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  overflow-y: auto;
 `;
 
 const ColumnTitle = styled.p`
@@ -27,23 +32,33 @@ const ColumnTitle = styled.p`
   margin: 0px;
   text-align: center;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #706565;
+  border-bottom: 2px solid #f09090;
 `;
 
 const BottomColumn = styled.div`
   // background: #ffcebd;
-  grid-column-start: 1;
-  grid-column-end: 2;
+  // grid-column-start: 1;
+  // grid-column-end: 3;
+  margin-left: 3rem;
+  margin-top:1rem;
 `;
 
 const Button = styled.button`
-  background: #9c6754;
+  background: #f09090;
   color: white;
+  &:hover {
+    background: #f0d8d8;
+    box-shadow: none;
+    color: #706565;
+  }
   cursor: pointer;
   padding: 0.8rem;
   border-radius: 8px;
   border-style: none;
   text-align: center;
+  font-weight: bold;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 `;
 
 export type CandidateState = Candidate[];
@@ -66,7 +81,7 @@ export const Home: React.FC = () => {
     id: 0,
   });
 
-  const [id, setId] = useState<number>(1)
+  const [id, setId] = useState<number>(1);
 
   const [candidates, setCandidates] = useState<CandidateState>([]);
   console.log("candidates", candidates);
@@ -76,7 +91,7 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <>
+    <div>
       <Board>
         <Column>
           <ColumnTitle>First Interview</ColumnTitle>
@@ -95,7 +110,7 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
-              }else{
+              } else {
                 return null;
               }
             })}
@@ -117,7 +132,7 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
-              }else{
+              } else {
                 return null;
               }
             })}
@@ -139,7 +154,7 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
-              }else{
+              } else {
                 return null;
               }
             })}
@@ -161,7 +176,7 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
-              }else{
+              } else {
                 return null;
               }
             })}
@@ -183,15 +198,15 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
-              }else{
+              } else {
                 return null;
               }
             })}
         </Column>
-        <BottomColumn>
-          <Button onClick={hanldeAddCandidate}>Add Candidate</Button>
-        </BottomColumn>
       </Board>
+      <BottomColumn>
+        <Button onClick={hanldeAddCandidate}>Add Candidate</Button>
+      </BottomColumn>
       {showForm && (
         <AddCandidate
           setShowForm={setShowForm}
@@ -211,6 +226,6 @@ export const Home: React.FC = () => {
           deleteCandidate={deleteCandidate}
         />
       )}
-    </>
+    </div>
   );
 };

@@ -13,6 +13,10 @@ const Card = styled.div`
   border-radius: 0.2rem;
   margin-top: 0.8rem;
   padding: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  &:hover{
+    box-shadow:none;
+  }
 `;
 
 const FlexDiv = styled.div`

@@ -15,10 +15,10 @@ const Container = styled.div`
   margin: 15% auto;
   padding: 1rem;
   border-radius: 0.3rem;
-  border: 2px solid #b36b6b;
   width: 30%;
   background: white;
   font-size: 1.2rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 `;
 
 const Title = styled.p`

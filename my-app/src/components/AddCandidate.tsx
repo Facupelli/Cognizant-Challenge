@@ -10,10 +10,11 @@ const Container = styled.div`
   margin: 15% auto;
   padding: 1rem;
   border-radius: 0.3rem;
-  border: 2px solid #b36b6b;
   width: 30%;
   background: white;
   font-size: 1.2rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
 `;
 
 const Form = styled.div`
@@ -21,6 +22,7 @@ const Form = styled.div`
   grid-template-columns: 30% 60%;
   align-items: baseline;
   row-gap: 1rem;
+  padding: 0.5rem;
 `;
 
 const Label = styled.label`
@@ -30,13 +32,15 @@ const Label = styled.label`
 const Input = styled.input`
   padding: 0.6rem;
   border-radius: 0.2rem;
-  border: 1px solid #f09090;
+  border: 1px solid #f0d8d8;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 `;
 
 const MarginLeft = styled.div`
+  grid-column-start: 1;
+  grid-column-end: 3;
   margin-top: 0.8rem;
-  display: flex;
-  justify-content: end;
+  margin-left: auto;
 `;
 
 type FormData = {
@@ -89,33 +93,38 @@ export const AddCandidate: React.FC<Props> = ({
         status: "",
         id: 0,
       });
+      setShowForm(false);
     } else {
       // ADD CANDIDATE
-      const candiadateData = {
-        fullName: data.fullName,
-        note: data.note,
-        status: "First Interview",
-        id,
-      };
+      if (data.fullName.length > 0) {
+        const candiadateData = {
+          fullName: data.fullName,
+          note: data.note,
+          status: "First Interview",
+          id,
+        };
 
-      setId(id + 1);
+        setId(id + 1);
 
-      const sameName = candidates.filter((el) => el.fullName === data.fullName);
-      if (sameName.length > 0) {
-        console.log("CANDIDATES CANT HAVE THE SAME NAME");
-        // ADD CANDIDATE
-      } else {
-        setCandidates([...candidates, candiadateData]);
-        reset();
-        setEditCandidate({
-          fullName: "",
-          note: "",
-          status: "",
-          id: 0,
-        });
+        const sameName = candidates.filter(
+          (el) => el.fullName === data.fullName
+        );
+        if (sameName.length > 0) {
+          console.log("CANDIDATES CANT HAVE THE SAME NAME");
+          // ADD CANDIDATE
+        } else {
+          setCandidates([...candidates, candiadateData]);
+          reset();
+          setEditCandidate({
+            fullName: "",
+            note: "",
+            status: "",
+            id: 0,
+          });
+          setShowForm(false);
+        }
       }
     }
-    setShowForm(false);
   });
 
   const handleCloseForm = () => {
@@ -152,17 +161,15 @@ export const AddCandidate: React.FC<Props> = ({
             ) : (
               <Input {...register("note")} />
             )}
-          </Form>
 
-          {editCandidate.fullName.length > 0 ? (
             <MarginLeft>
-              <Button type="submit">EDIT</Button>
+              {editCandidate.fullName.length > 0 ? (
+                <Button type="submit">EDIT</Button>
+              ) : (
+                <Button type="submit">ADD</Button>
+              )}
             </MarginLeft>
-          ) : (
-            <MarginLeft>
-              <Button type="submit">ADD</Button>
-            </MarginLeft>
-          )}
+          </Form>
         </form>
       </Container>
     </ModalStyled>
