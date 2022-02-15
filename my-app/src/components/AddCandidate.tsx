@@ -128,8 +128,6 @@ export const AddCandidate: React.FC<Props> = ({
     });
   };
 
-  const handleEdit = () => {};
-
   return (
     <ModalStyled>
       <Container>

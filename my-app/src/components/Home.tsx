@@ -95,6 +95,8 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
+              }else{
+                return null;
               }
             })}
         </Column>
@@ -115,6 +117,8 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
+              }else{
+                return null;
               }
             })}
         </Column>
@@ -135,6 +139,8 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
+              }else{
+                return null;
               }
             })}
         </Column>
@@ -155,6 +161,8 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
+              }else{
+                return null;
               }
             })}
         </Column>
@@ -175,6 +183,8 @@ export const Home: React.FC = () => {
                     setEditCandidate={setEditCandidate}
                   />
                 );
+              }else{
+                return null;
               }
             })}
         </Column>
