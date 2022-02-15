@@ -27,6 +27,7 @@ const Form = styled.div`
 
 const Label = styled.label`
   margin-right: 1rem;
+  font-size: 1rem;
 `;
 
 const Input = styled.input`

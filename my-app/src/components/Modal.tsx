@@ -18,18 +18,20 @@ const Container = styled.div`
   width: 30%;
   background: white;
   font-size: 1.2rem;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
 `;
 
 const Title = styled.p`
   text-align: center;
-`
+`;
 
 const FlexDiv = styled.div`
   display: flex;
   justify-content: center;
   gap: 2rem;
-`
+  margin-top: 1.5rem;
+`;
 
 export const Button = styled.button`
   background: #f0d8d8;
