@@ -13,6 +13,10 @@ const Board = styled.div`
   justify-content: center;
   height: 80vh;
   padding-top: 2rem;
+
+  @media (max-width: 600px) {
+    margin: 1rem;
+  }
 `;
 
 const Column = styled.div`
@@ -24,6 +28,11 @@ const Column = styled.div`
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   overflow-y: auto;
+
+  @media (max-width: 600px) {
+    grid-column: 1/-1;
+    height: 100vh;
+  }
 `;
 
 const ColumnTitle = styled.p`
@@ -40,7 +49,14 @@ const BottomColumn = styled.div`
   // grid-column-start: 1;
   // grid-column-end: 3;
   margin-left: 3rem;
-  margin-top:1rem;
+  margin-top: 1rem;
+
+  @media (max-width: 600px) {
+    position: fixed;
+    margin: 0;
+    margin-left: 2rem;
+    top: 92%;
+  }
 `;
 
 const Button = styled.button`

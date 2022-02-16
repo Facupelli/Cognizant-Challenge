@@ -20,6 +20,11 @@ const Container = styled.div`
   font-size: 1.2rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+  @media (max-width: 600px) {
+    width: 85%;
+    margin: 70% auto;
+  }
 `;
 
 const Title = styled.p`
